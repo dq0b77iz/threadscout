@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reply report</title>
+  <style>
+    :root { --ink:#1d1b19; --muted:#6f6a64; --line:#e7e2dc; --bg:#f7f5f2; --accent:#e8590c; }
+    * { box-sizing: border-box; }
+    body { margin:0; font:14px/1.5 Inter, system-ui, sans-serif; background:var(--bg); color:var(--ink); }
+    .wrap { max-width: 960px; margin: 0 auto; padding: 36px 20px 60px; }
+    h1 { margin:0; font-size:24px; letter-spacing:-.3px; }
+    .sub { color:var(--muted); margin-bottom:22px; }
+    .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin-bottom:22px; }
+    .stat { background:#fff; border:1px solid var(--line); border-radius:10px; padding:14px 16px; }
+    .stat b { display:block; font-size:24px; } .stat span { color:var(--muted); font-size:12px; }
+    .bar { height:6px; background:var(--line); border-radius:99px; overflow:hidden; margin-top:8px; } .bar i { display:block; height:100%; background:var(--accent); }
+    table { width:100%; border-collapse:collapse; background:#fff; border:1px solid var(--line); border-radius:10px; overflow:hidden; }
+    th, td { text-align:left; padding:10px 12px; border-bottom:1px solid var(--line); font-size:13px; vertical-align:top; }
+    th { font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); background:#fbf9f7; }
+    a { color:var(--accent); text-decoration:none; } a:hover { text-decoration:underline; }
+    .pill { padding:1px 8px; border-radius:99px; font-size:11.5px; font-weight:600; }
+    .live { background:#fdeee4; color:var(--accent); } .verified { background:#e6f4ea; color:#2b8a3e; } .removed, .deleted { background:#fde8e8; color:#c92a2a; }
+    .muted { color:var(--muted); font-size:12px; }
+    footer { margin-top:24px; color:var(--muted); font-size:12px; }
+  </style>
+</head>
+<body>
+<div class="wrap" id="root">Loading...</div>
+<script>
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+const token = location.pathname.split('/').pop();
+fetch('/api/report/' + token).then((r) => r.json()).then((d) => {
+  if (d.error) { document.getElementById('root').textContent = d.error; return; }
+  const s = d.stats, pct = Math.min(100, Math.round((s.live / Math.max(1, s.target)) * 100));
+  const label = (r) => r.status !== 'live' ? r.status : (Date.now() - r.postedAt > 2.592e8 ? 'verified' : 'live');
+  document.getElementById('root').innerHTML = `
+    <h1>${esc(d.name)}: Reddit reply report</h1>
+    <div class="sub">Every reply posted for this campaign, updated as it's checked. Replies count once they've stayed up 72 hours.</div>
+    <div class="stats">
+      <div class="stat"><b>${s.live}/${s.target}</b><span>live replies vs goal</span><div class="bar"><i style="width:${pct}%"></i></div></div>
+      <div class="stat"><b>${s.verified}</b><span>verified (72h+)</span></div>
+      <div class="stat"><b>${s.removed}</b><span>removed</span></div>
+      <div class="stat"><b>${s.subreddits}</b><span>communities</span></div>
+      <div class="stat"><b>${new Date(s.campaignEnds).toLocaleDateString()}</b><span>campaign ends</span></div>
+    </div>
+    <table><tr><th>Thread</th><th>Posted</th><th>Status</th><th>Score</th></tr>
+    ${d.replies.map((r) => `<tr><td><a href="${esc(r.permalink)}" target="_blank" rel="noopener">${esc(r.threadTitle)}</a><div class="muted">r/${esc(r.subreddit)}</div></td>
+      <td>${new Date(r.postedAt).toLocaleString()}</td><td><span class="pill ${label(r)}">${label(r)}</span></td><td>${r.score ?? '-'}</td></tr>`).join('') || '<tr><td colspan="4" class="muted">No replies yet.</td></tr>'}
+    </table>
+    <footer>Each reply discloses the affiliation with ${esc(d.name)}. Moderators can still remove replies.</footer>`;
+});
+</script>
+</body>
+</html>

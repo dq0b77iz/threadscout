@@ -1,0 +1,16 @@
+{
+  "name": "threadscout",
+  "version": "1.0.0",
+  "description": "Find Reddit threads where people ask for what you sell, draft disclosed AI replies, post with approval, and track what stays up.",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node --env-file-if-exists=.env server.js",
+    "dev": "node --watch --env-file-if-exists=.env server.js"
+  },
+  "engines": { "node": ">=22" },
+  "dependencies": {
+    "express": "^4.21.2",
+    "nodemailer": "^6.9.16"
+  }
+}

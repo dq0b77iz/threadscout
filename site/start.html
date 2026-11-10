@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Set up your order | Threadscout</title>
+  <meta name="description" content="We find Reddit threads where people ask for a product like yours, write a helpful reply, and post it with a clear disclosure. From $29, one-time.">
+  <meta property="og:title" content="Threadscout: get mentioned where buyers are asking">
+  <meta property="og:description" content="Helpful, disclosed replies on Reddit threads asking for what you sell. 3 free replies to start.">
+  <meta property="og:type" content="website">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="./">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 6h22a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H14l-6 5v-5H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z" fill="#0e6b5c"/><rect x="8" y="11" width="16" height="4" rx="1" fill="#ffe58a"/><rect x="8" y="17" width="10" height="2" rx="1" fill="#fff" opacity=".7"/></svg>
+      Threadscout
+    </a>
+    <nav aria-label="Main">
+      <a href="./#how">How it works</a>
+      <a href="./#pricing">Pricing</a>
+      <a href="./#faq">FAQ</a>
+      <a class="btn small" href="./#trial">Get 3 free replies</a>
+    </nav>
+  </div>
+</header>
+
+<main class="page"><div class="wrap">
+<div class="split">
+  <div class="measure">
+    <h1>Payment received. Now tell us about your product.</h1>
+    <p>Plan: <b data-chosen>your plan</b></p>
+    <p>This takes about three minutes. We'll read it, set up your search, and either start posting or reach out first, whichever you pick below.</p>
+    <p>Your report page link comes by email as soon as the first reply is up. Your plan's days start then.</p>
+    <p>Questions: <a data-mail href="#"></a></p>
+  </div>
+  <form class="f" data-form="New order" data-next="thanks.html">
+    <input type="hidden" name="plan" value="">
+    <div class="row2">
+      <label>Email you paid with <input type="email" name="email" required autocomplete="email"></label>
+      <label>Product name <input type="text" name="product" required></label>
+    </div>
+    <label>Where should people go? <span class="h">The link we'll use in replies</span><input type="url" name="website" placeholder="https://" required></label>
+    <label>What you sell <span class="h">Plain words: what it does and the problem it solves</span><textarea name="about" rows="3" required></textarea></label>
+    <label>Who buys it <span class="h">e.g. solo freelancers, small dental practices, Shopify stores under $1M</span><input type="text" name="buyers" required></label>
+    <div class="row2">
+      <label>Price <span class="h">Free plan? Monthly price?</span><input type="text" name="pricing"></label>
+      <label>Competitors <span class="h">What people use now</span><input type="text" name="competitors"></label>
+    </div>
+    <label>Communities to avoid <span class="h">Optional</span><input type="text" name="avoid" placeholder="r/..."></label>
+    <fieldset>
+      <legend>Whose account should post?</legend>
+      <label class="opt"><input type="radio" name="account" value="ours" checked> Threadscout's account, with a line naming my business</label>
+      <label class="opt"><input type="radio" name="account" value="mine"> Mine. Contact me to set it up.</label>
+    </fieldset>
+    <fieldset>
+      <legend>When should we start?</legend>
+      <label class="opt"><input type="radio" name="start" value="now" checked> Right away</label>
+      <label class="opt"><input type="radio" name="start" value="talk first"> Talk to me before anything is posted</label>
+    </fieldset>
+    <label>Anything else? <span class="h">Tone, things to never say, features to mention</span><textarea name="notes" rows="2"></textarea></label>
+    <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <button class="btn go" type="submit">Send and start my plan</button>
+    <p class="msg" role="status"></p>
+  </form>
+</div></div></main>
+
+<footer>
+  <div class="wrap">
+    <div>&copy; <span data-year></span> <span data-cfg="operator"></span><br>Support: <a data-mail href="#"></a><br>Not affiliated with Reddit, Inc.</div>
+    <nav aria-label="Legal"><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a><a href="./#pricing">Pricing</a></nav>
+  </div>
+</footer>
+
+<script src="config.js"></script>
+<script src="site.js"></script>
+</body>
+</html>

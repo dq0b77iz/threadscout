@@ -1,21 +1,19 @@
 # Threadscout
 
-A self-hosted ThreadFox alternative. It finds Reddit threads where people are asking for what you sell, scores them with AI, drafts a helpful reply that discloses your affiliation, lets you approve and post it, and tracks whether it stays up.
+A self-hosted tool that finds Reddit threads where people are asking for what you sell, scores them with AI, drafts a helpful reply that discloses your affiliation, lets you approve and post it, and tracks whether it stays up.
 
 ## What it does
 
-| ThreadFox | Threadscout |
-|---|---|
-| Finds threads asking for your type of product | AI turns your product description into search phrases, target subreddits and ignore-words, then scans Reddit on a schedule |
-| Replies tailored to each community | Drafts read the post, the top comments and the subreddit's rules before writing |
-| Posts only where rules allow | Every thread gets a rules check (allowed / disallowed / unclear); banned-promo subs are skipped by default |
-| Discloses each reply | Disclosure line is enforced: a reply can't be posted without it |
-| Live report page | Public read-only `/report/<token>` page, no login |
-| Removal tracking | One-click "Mark removed"; automatic checks every 2 hours if you have Reddit API access |
-| Counts a post after 72h up | "Verified" status after 72 hours, plus a live-vs-goal tracker and campaign end date |
-| Weekly Monday leads email | Weekly digest of the best threads, email or in-app preview |
+- **Finds the right threads:** AI turns your product description into search phrases, target subreddits and ignore-words, then scans Reddit on a schedule.
+- **Writes for each community:** drafts read the post, the top comments and the subreddit's rules before writing.
+- **Respects the rules:** every thread gets a rules check (allowed / disallowed / unclear), and subreddits that ban promotion are skipped by default.
+- **Always discloses:** the disclosure line is enforced, so a reply can't be posted without it.
+- **Live report page:** a public, read-only `/report/<token>` page with no login.
+- **Removal tracking:** one-click "Mark removed", plus automatic checks every 2 hours if you have Reddit API access.
+- **Verified replies:** a reply counts as "Verified" after 72 hours up, with a live-vs-goal tracker and campaign end date.
+- **Weekly leads email:** a weekly digest of the best threads, by email or as an in-app preview.
 
-Extras ThreadFox doesn't have:
+Also included:
 
 - Fit score (0-100), buyer-intent label and suggested angle for every thread
 - Review queue: edit, rewrite with instructions ("shorter, mention the free plan"), skip, or post
